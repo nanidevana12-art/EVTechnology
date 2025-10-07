@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EV Technology Hub</title>
+<style>
+/* ========== RESET ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+  background:linear-gradient(-45deg,#000,#050a14,#001b11,#0b0014);
+  background-size:400% 400%;
+  animation:gradientMove 20s ease infinite;
+  overflow-x:hidden;
+}
+@keyframes gradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ========== NAVBAR ========== */
+nav{
+  position:fixed;top:0;width:100%;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 8%;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+nav h1{
+  font-size:1.5rem;
+  color:#00b7ff;
+  text-shadow:0 0 10px #00b7ff,0 0 20px #00b7ff;
+}
+nav ul{display:flex;list-style:none;gap:30px}
+nav a{
+  text-decoration:none;
+  color:#fff;
+  font-weight:500;
+  transition:.3s;
+  position:relative;
+}
+nav a::after{
+  content:"";
+  position:absolute;bottom:-5px;left:0;width:0;height:2px;
+  background:linear-gradient(90deg,#ff3131,#00b7ff,#00ff9d);
+  transition:.4s;
+}
+nav a:hover{color:#00ff9d;text-shadow:0 0 10px #00ff9d}
+nav a:hover::after{width:100%}
+
+/* ========== HERO ========== */
+.hero{
+  height:100vh;
+  background:url('images/hero-engine.jpg') center/cover no-repeat fixed;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  position:relative;text-align:center;
+}
+.hero::after{
+  content:"";
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.6);
+}
+.hero-content{
+  position:relative;z-index:2;max-width:800px;padding:0 20px;
+}
+.hero h1{
+  font-size:3rem;line-height:1.2;
+  text-shadow:0 0 15px #00b7ff,0 0 30px #ff3131;
+}
+.hero h1 span{
+  color:#00ff9d;
+  text-shadow:0 0 15px #00ff9d,0 0 30px #00b7ff;
+}
+.hero p{margin-top:16px;font-size:1.2rem;color:#ccc}
+.btn{
+  background:linear-gradient(90deg,#ff3131,#00b7ff,#00ff9d);
+  padding:14px 32px;border:none;border-radius:8px;color:#fff;
+  font-weight:bold;cursor:pointer;margin-top:40px;
+  transition:0.3s;box-shadow:0 0 20px #ff3131;
+}
+.btn:hover{transform:scale(1.1);box-shadow:0 0 25px #00ff9d,0 0 45px #00b7ff}
+
+/* ========== SECTION BASE ========== */
+section{padding:100px 8%;text-align:center;position:relative}
+.section-title{font-size:2.5rem;margin-bottom:40px;text-shadow:0 0 10px #00b7ff}
+.highlight-blue{color:#00b7ff}
+.highlight-red{color:#ff3131}
+.highlight-green{color:#00ff9d}
+
+/* ========== HYBRID ========== */
+.hybrid{
+  background:url('images/hybrid-diagram.jpg') center/cover fixed no-repeat;
+}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,0.7)}
+.hybrid-content{position:relative;z-index:2;max-width:700px;margin:auto;text-align:left}
+.hybrid-content h3{margin-top:20px;color:#00ff9d}
+.hybrid-content p{color:#ccc;font-size:0.95rem;margin-top:6px}
+
+/* ========== BATTERY ========== */
+.battery{
+  background:url('images/battery.jpg') center/cover fixed no-repeat;
+}
+.battery .card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:20px;margin:20px auto;max-width:700px;
+  text-align:left;backdrop-filter:blur(6px);
+  transition:0.3s;
+}
+.battery .card:hover{transform:translateY(-8px);box-shadow:0 0 20px #00b7ff}
+
+/* ========== COMPARISON ========== */
+.compare{
+  background:#0b0b0b;
+}
+.compare-table{
+  border-collapse:collapse;width:100%;max-width:800px;margin:0 auto;
+}
+.compare-table th,.compare-table td{
+  border:1px solid rgba(255,255,255,0.1);
+  padding:12px;text-align:center;
+}
+.compare-table th{background:rgba(255,255,255,0.1);color:#00b7ff}
+.compare-table tr:nth-child(even){background:rgba(255,255,255,0.05)}
+
+/* ========== SUSTAINABILITY ========== */
+.sustain{
+  background:url('images/sustainability.jpg') center/cover fixed no-repeat;
+}
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;position:relative;z-index:2}
+.stat-box{
+  background:rgba(255,255,255,0.05);padding:20px 40px;
+  border-radius:12px;text-align:center;min-width:220px;
+  transition:0.3s;backdrop-filter:blur(6px);
+}
+.stat-box:hover{transform:scale(1.05);box-shadow:0 0 20px #00ff9d}
+
+/* ========== FUTURE ========== */
+.future{
+  background:url('images/future-car.jpg') center/cover fixed no-repeat;
+}
+.future .cards{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;position:relative;z-index:2}
+.future .card{
+  background:rgba(255,255,255,0.05);border-radius:12px;
+  padding:30px;width:280px;text-align:center;transition:.3s;
+}
+.future .card:hover{
+  transform:rotateY(8deg) rotateX(3deg) scale(1.05);
+  box-shadow:0 0 25px #00b7ff,0 0 50px #00ff9d;
+}
+
+/* ========== NEWS ========== */
+.news{
+  background:#0b0b0b;
+}
+.news-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;max-width:900px;margin:auto;
+}
+.news-card{
+  background:rgba(255,255,255,0.05);border-radius:10px;padding:20px;
+  transition:.3s;text-align:left;
+}
+.news-card:hover{transform:translateY(-8px);box-shadow:0 0 20px #ff3131}
+.news-card h3{color:#00b7ff;margin-bottom:10px}
+
+/* ========== CONTACT ========== */
+.contact{
+  background:#000;
+}
+.contact form{
+  max-width:600px;margin:auto;text-align:left;
+  background:rgba(255,255,255,0.05);padding:30px;border-radius:12px;
+}
+.contact input,.contact textarea{
+  width:100%;margin:10px 0;padding:10px;border:none;
+  border-radius:6px;outline:none;
+  background:rgba(255,255,255,0.1);color:#fff;
+}
+.contact button{
+  background:linear-gradient(90deg,#ff3131,#00b7ff,#00ff9d);
+  padding:10px 20px;border:none;border-radius:8px;
+  color:#fff;cursor:pointer;transition:.3s;
+}
+.contact button:hover{transform:scale(1.05);box-shadow:0 0 20px #00b7ff}
+
+/* ========== FOOTER ========== */
+footer{
+  background:#050505;text-align:center;padding:30px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  color:#aaa;
+}
+footer h2{color:#00b7ff;text-shadow:0 0 15px #00b7ff}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:768px){
+  nav ul{display:none}
+  .hero h1{font-size:2.2rem}
+  .stats{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <h1>⚡ EVTechnology</h1>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#hybrid">Technology</a></li>
+    <li><a href="#battery">Battery</a></li>
+    <li><a href="#sustain">Sustainability</a></li>
+    <li><a href="#future">Future</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Powering the <span>Future</span> of Mobility</h1>
+    <p>Discover the technology driving electric and hybrid revolution</p>
+    <button class="btn" onclick="scrollToSection('hybrid')">Explore Now</button>
+  </div>
+</section>
+
+<!-- HYBRID -->
+<section class="hybrid" id="hybrid">
+  <div class="overlay"></div>
+  <div class="hybrid-content">
+    <h2 class="section-title">Hybrid <span class="highlight-green">Technology</span></h2>
+    <h3>⚙️ Dual Power System</h3>
+    <p>Combines internal combustion and electric motors for efficiency.</p>
+    <h3>🔋 Regenerative Braking</h3>
+    <p>Captures kinetic energy and recharges the battery during braking.</p>
+    <h3>🧠 Smart Management</h3>
+    <p>Optimizes power flow between systems for peak performance.</p>
+  </div>
+</section>
+
+<!-- BATTERY -->
+<section class="battery" id="battery">
+  <h2 class="section-title"><span class="highlight-blue">Battery</span> & Charging</h2>
+  <div class="card">
+    <h3>🔌 Fast Charging</h3>
+    <p>Charge up to 80% in just 30 minutes with DC fast charge stations.</p>
+  </div>
+  <div class="card">
+    <h3>⚡ Long Lifespan</h3>
+    <p>Smart thermal systems enhance performance and extend life.</p>
+  </div>
+  <div class="card">
+    <h3>🔁 Regeneration</h3>
+    <p>Recover energy and store it efficiently for your next ride.</p>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="compare">
+  <h2 class="section-title">EV vs <span class="highlight-red">Traditional Cars</span></h2>
+  <table class="compare-table">
+    <tr><th>Feature</th><th>Electric Vehicle</th><th>Gasoline Vehicle</th></tr>
+    <tr><td>Emission</td><td>Zero Tailpipe</td><td>High CO₂</td></tr>
+    <tr><td>Efficiency</td><td>90%</td><td>30%</td></tr>
+    <tr><td>Maintenance</td><td>Low</td><td>High</td></tr>
+    <tr><td>Cost per km</td><td>₹1.5</td><td>₹9</td></tr>
+  </table>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="sustain" id="sustain">
+  <div class="overlay"></div>
+  <h2 class="section-title"><span class="highlight-blue">Sustainability</span> Impact</h2>
+  <div class="stats">
+    <div class="stat-box"><h3>45%</h3><p>CO₂ Reduction</p></div>
+    <div class="stat-box"><h3>+30%</h3><p>Fuel Efficiency</p></div>
+    <div class="stat-box"><h3>A+</h3><p>Eco Rating</p></div>
+  </div>
+</section>
+
+<!-- FUTURE -->
+<section class="future" id="future">
+  <div class="overlay"></div>
+  <h2 class="section-title">Future <span class="highlight-red">Innovations</span></h2>
+  <div class="cards">
+    <div class="card"><h3>🤖 AI Integration</h3><p>Adaptive driving with real-time machine learning.</p></div>
+    <div class="card"><h3>🚗 Autonomous</h3><p>Next-gen autopilot for safer, smarter journeys.</p></div>
+    <div class="card"><h3>🌍 Zero Emissions</h3><p>Hydrogen & solid-state batteries for total sustainability.</p></div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news">
+  <h2 class="section-title"><span class="highlight-green">Latest</span> Innovations</h2>
+  <div class="news-grid">
+    <div class="news-card"><h3>🔋 Solid-State Breakthrough</h3><p>2x energy density and faster charging cycles.</p></div>
+    <div class="news-card"><h3>☀️ Solar Integration</h3><p>Next-gen cars charge directly from sunlight.</p></div>
+    <div class="news-card"><h3>🛰️ Vehicle-to-Grid</h3><p>EVs that return power to the grid when parked.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 class="section-title">Get in <span class="highlight-blue">Touch</span></h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="4" placeholder="Your Message"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h2>EV Technology Hub</h2>
+  <p>Driving toward a cleaner, smarter world.</p>
+  <p>© 2025 EV Technology Hub. All rights reserved.</p>
+</footer>
+
+<script>
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth"});}
+
+// Reveal animation on scroll
+window.addEventListener("scroll",()=>{
+  document.querySelectorAll("section").forEach(sec=>{
+    const pos=sec.getBoundingClientRect().top;
+    if(pos<window.innerHeight-100){sec.style.opacity="1";sec.style.transform="translateY(0)"}
+  });
+});
+document.querySelectorAll("section").forEach(sec=>{
+  sec.style.opacity="0";sec.style.transform="translateY(50px)";
+  sec.style.transition="1s ease";
+});
+</script>
+</body>
+</html>
